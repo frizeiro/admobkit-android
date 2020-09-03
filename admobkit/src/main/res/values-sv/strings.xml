@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">Samtyckespolicy</string>
+    <string name="admobkit_consent_revoke_text">Du kan återställa ditt datatillstånd när som helst. För att göra detta måste du återkalla det nuvarande och besvara frågeformuläret igen.</string>
+    <string name="admobkit_revoke">Återkalla</string>
+</resources>

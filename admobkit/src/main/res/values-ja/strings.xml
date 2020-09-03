@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">同意ポリシー</string>
+    <string name="admobkit_consent_revoke_text">データの同意はいつでもリセットできます。 これを行うには、現在のものを取り消して、再度同意質問票に回答する必要があります。</string>
+    <string name="admobkit_revoke">取り消す</string>
+</resources>

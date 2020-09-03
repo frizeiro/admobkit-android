@@ -1,0 +1,10 @@
+<resources>
+    <string name="admobkit_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admobkit_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admobkit_interstitialVideo_id" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
+    <string name="admobkit_rewardedVideo_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admobkit_nativeAdvanced_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admobkit_nativeAdvancedVideo_id" translatable="false">ca-app-pub-3940256099942544/1044960115</string>
+
+    <string name="admobkit_purchased_sku" translatable="false">android.test.purchased</string>
+</resources>

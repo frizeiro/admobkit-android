@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">Consent Policy</string>
+    <string name="admobkit_consent_revoke_text">You can reset your data consent at any time. To do this, you must revoke the current one and answer the consent questionnaire again.</string>
+    <string name="admobkit_revoke">Revoke</string>
+</resources>

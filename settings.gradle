@@ -1,0 +1,3 @@
+include ':admobkit'
+include ':app'
+rootProject.name = "AdMob Integration Kit"

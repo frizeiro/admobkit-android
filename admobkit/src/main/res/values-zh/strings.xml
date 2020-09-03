@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">同意政策</string>
+    <string name="admobkit_consent_revoke_text">您可以随时重置数据同意书。 为此，您必须撤销当前的问卷，然后再次回答同意调查表。</string>
+    <string name="admobkit_revoke">撤消</string>
+</resources>

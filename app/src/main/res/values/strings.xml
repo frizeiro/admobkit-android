@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AdMob Integration Kit</string>
+    <string name="show_interstitial_ad">Show interstitial ad</string>
+    <string name="revoke_consent">Revoke consent</string>
+    <string name="remove_ads">Remove ads</string>
+    <string name="consume_purchase">Consume purchase</string>
+</resources>

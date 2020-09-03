@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">Politique de consentement</string>
+    <string name="admobkit_consent_revoke_text">Vous pouvez réinitialiser votre consentement aux données à tout moment. Pour ce faire, vous devez révoquer l\'actuel et répondre à nouveau au questionnaire de consentement.</string>
+    <string name="admobkit_revoke">Révoquer</string>
+</resources>

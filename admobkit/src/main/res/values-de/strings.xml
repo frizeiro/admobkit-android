@@ -1,0 +1,5 @@
+<resources>
+    <string name="admobkit_consent_policy">Zustimmungsrichtlinie</string>
+    <string name="admobkit_consent_revoke_text">Sie können Ihre Dateneinwilligung jederzeit zurücksetzen. Dazu müssen Sie den aktuellen widerrufen und den Einwilligungsfragebogen erneut beantworten.</string>
+    <string name="admobkit_revoke">Widerrufen</string>
+</resources>

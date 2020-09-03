@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">Onay Politikası</string>
+    <string name="admobkit_consent_revoke_text">Veri onayınızı istediğiniz zaman sıfırlayabilirsiniz. Bunu yapmak için, mevcut olanı iptal etmeli ve onay anketini tekrar yanıtlamalısınız.</string>
+    <string name="admobkit_revoke">İptal Et</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">Политика согласия</string>
+    <string name="admobkit_consent_revoke_text">Вы можете сбросить свое согласие на данные в любое время. Для этого необходимо отозвать действующий и повторно ответить на анкету согласия.</string>
+    <string name="admobkit_revoke">Отозвать</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="admobkit_consent_policy">سياسة الموافقة</string>
+    <string name="admobkit_consent_revoke_text">يمكنك إعادة تعيين الموافقة على البيانات الخاصة بك في أي وقت. للقيام بذلك ، يجب عليك إلغاء الاستبيان الحالي والإجابة على استبيان الموافقة مرة أخرى.</string>
+    <string name="admobkit_revoke">سحب او إبطال</string>
+</resources>

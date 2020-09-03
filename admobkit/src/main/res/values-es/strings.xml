@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admobkit_consent_policy">Política de consentimiento</string>
+    <string name="admobkit_consent_revoke_text">Puede restablecer su consentimiento de datos en cualquier momento. Para ello, debe revocar el actual y volver a contestar el cuestionario de consentimiento.</string>
+    <string name="admobkit_revoke">Revocar</string>
+</resources>
