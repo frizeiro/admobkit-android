@@ -22,47 +22,44 @@ class MainActivity : AppCompatActivity() {
     private val adsManager: AdsManager = AdsManager(this)
     private val billingManager: BillingManager = BillingManager(this)
 
+    private val purchaseListener = object : PurchaseListener {
+        override fun onResult(purchases: List<BillingPurchase>, pending: List<BillingPurchase>) {
+            if (purchases.contains(purchasedSku)) {
+                Intent(this@MainActivity, MainActivity::class.java)
+                finish()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
-        setupAdMob()
-        setupBillingManager()
+        banner = findViewById(R.id.adContainer)
+
+        setupAdMobKit()
 
         // TODO: implement example button's action
     }
 
-    private fun setupAdMob() {
-        banner = findViewById(R.id.adContainer)
+    private fun setupAdMobKit() {
+        // purchaseListener
+        billingManager.purchaseListener = purchaseListener
 
-        val config = AdsConfig(
-            listOf("AAE412509C1012E2A5242D58CCE0EB14")
-        )
-
+        // configs
+        val config = AdsConfig(listOf("AAE412509C1012E2A5242D58CCE0EB14"))
         config.defaultBannerAdId = getString(R.string.admobkit_banner_id)
         config.defaultInterstitialAdId = getString(R.string.admobkit_interstitial_id)
         config.purchaseSkuForRemovingAds = listOf(purchasedSku)
         config.testConsentGeography = NOT_EEA
 
+        // initialize
         AdsManager.initialize(this, config, object : AdsInitializeListener {
             override fun onInitialize() {
                 adsManager.loadBanner(banner)
                 adsManager.loadInterstitial()
             }
         })
-    }
-
-    private fun setupBillingManager() {
-        billingManager.purchaseListener = object : PurchaseListener {
-            override fun onResult(purchases: List<BillingPurchase>, pending: List<BillingPurchase>) {
-                if (purchases.contains(purchasedSku)) {
-                    Intent(this@MainActivity, MainActivity::class.java)
-                    finish()
-                }
-            }
-        }
     }
 
 }
