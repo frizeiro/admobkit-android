@@ -17,22 +17,22 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/show_interstitial_ad"
+                android:id="@+id/show_interstitial_ad_button"
                 style="@style/button"
                 android:text="@string/show_interstitial_ad" />
 
             <Button
-                android:id="@+id/revoke_consent"
+                android:id="@+id/revoke_consent_button"
                 style="@style/button"
                 android:text="@string/revoke_consent" />
 
             <Button
-                android:id="@+id/remove_ads"
+                android:id="@+id/remove_ads_button"
                 style="@style/button"
                 android:text="@string/remove_ads" />
 
             <Button
-                android:id="@+id/consume_purchase"
+                android:id="@+id/consume_purchase_button"
                 style="@style/button"
                 android:text="@string/consume_purchase" />
 

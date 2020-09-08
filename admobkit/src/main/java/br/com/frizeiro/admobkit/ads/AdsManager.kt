@@ -72,7 +72,7 @@ class AdsManager(activity: Activity) {
     }
 
     @JvmOverloads
-    fun loadInterstitial(adUnitId: String? = null) {
+    fun loadInterstitial(adUnitId: String? = null, onLoad: (() -> Unit)? = null) {
         // Reference: https://developers.google.com/admob/android/interstitial
 
         if (!isInitialized || interstitialAd?.isLoaded == true) {
@@ -85,6 +85,10 @@ class AdsManager(activity: Activity) {
         interstitialAd?.adUnitId = adUnitId ?: config.defaultBannerAdId
 
         interstitialAd?.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                onLoad?.invoke()
+            }
+
             override fun onAdOpened() {
                 numberOfInterstitialDisplayed++
             }
@@ -142,11 +146,14 @@ class AdsManager(activity: Activity) {
             setDebugConfiguration()
 
             if (!config.isAllowed || !isAllowed(activity)) {
+                listener.onUninitialized()
+                listener.always()
                 return
             }
 
             if (isInitialized) {
                 listener.onInitialize()
+                listener.always()
                 return
             }
 
@@ -164,6 +171,9 @@ class AdsManager(activity: Activity) {
                 override fun onResult(purchases: List<BillingPurchase>, pending: List<BillingPurchase>) {
                     if (!purchases.containsAny(config.purchaseSkuForRemovingAds)) {
                         performConsent(activity, listener)
+                    } else {
+                        listener.onUninitialized()
+                        listener.always()
                     }
                 }
 
@@ -176,6 +186,9 @@ class AdsManager(activity: Activity) {
             ConsentManager(activity).request {
                 if (it) {
                     performInitializeAds(activity, listener)
+                } else {
+                    listener.onUninitialized()
+                    listener.always()
                 }
             }
         }
@@ -184,7 +197,9 @@ class AdsManager(activity: Activity) {
             MobileAds.initialize(activity) {
                 isInitialized = true
                 MobileAds.setAppMuted(true)
+
                 listener.onInitialize()
+                listener.always()
             }
         }
 

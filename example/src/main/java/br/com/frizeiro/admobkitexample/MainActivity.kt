@@ -2,6 +2,7 @@ package br.com.frizeiro.admobkitexample
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import br.com.frizeiro.admobkit.ads.AdsConfig
@@ -15,36 +16,53 @@ import br.com.frizeiro.admobkit.consent.ConsentGeography.NOT_EEA
 
 class MainActivity : AppCompatActivity() {
 
-    private val purchasedSku by lazy { getString(R.string.admobkit_purchased_sku) }
+    //region Private Variables
 
-    private lateinit var banner: FrameLayout
+    private val purchasedSku by lazy { getString(R.string.admobkit_purchased_sku) }
 
     private val adsManager: AdsManager = AdsManager(this)
     private val billingManager: BillingManager = BillingManager(this)
 
-    private val purchaseListener = object : PurchaseListener {
-        override fun onResult(purchases: List<BillingPurchase>, pending: List<BillingPurchase>) {
-            if (purchases.contains(purchasedSku)) {
-                Intent(this@MainActivity, MainActivity::class.java)
-                finish()
-            }
+    private var billingPurchases: List<BillingPurchase>? = null
+        set(newValue) {
+            setupPurchaseButtons(field, newValue)
+            field = newValue
         }
-    }
+
+    //endregion
+
+    //region Private Views
+
+    private val bannerLayout: FrameLayout by lazy { findViewById(R.id.adContainer) }
+
+    private val showInterstitialAdButton: Button by lazy { findViewById(R.id.show_interstitial_ad_button) }
+    private val revokeConsentButton: Button by lazy { findViewById(R.id.revoke_consent_button) }
+    private val removeAdsButton: Button by lazy { findViewById(R.id.remove_ads_button) }
+    private val consumePurchaseButton: Button by lazy { findViewById(R.id.consume_purchase_button) }
+
+    //endregion
+
+    //region Life Cycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        banner = findViewById(R.id.adContainer)
-
+        setupButtons()
         setupAdMobKit()
-
-        // TODO: implement example button's action
     }
+
+    //endregion
+
+    //region Private Methods
 
     private fun setupAdMobKit() {
         // purchaseListener
-        billingManager.purchaseListener = purchaseListener
+        billingManager.purchaseListener = object : PurchaseListener {
+            override fun onResult(purchases: List<BillingPurchase>, pending: List<BillingPurchase>) {
+                billingPurchases = purchases
+            }
+        }
 
         // configs
         val config = AdsConfig(listOf("AAE412509C1012E2A5242D58CCE0EB14"))
@@ -54,12 +72,60 @@ class MainActivity : AppCompatActivity() {
         config.testConsentGeography = NOT_EEA
 
         // initialize
-        AdsManager.initialize(this, config, object : AdsInitializeListener {
+        AdsManager.initialize(this, config, object : AdsInitializeListener() {
             override fun onInitialize() {
-                adsManager.loadBanner(banner)
-                adsManager.loadInterstitial()
+                adsManager.loadBanner(bannerLayout)
+
+                adsManager.loadInterstitial {
+                    showInterstitialAdButton.isEnabled = true
+                }
+            }
+
+            override fun always() {
+                revokeConsentButton.isEnabled = adsManager.isConsentApplicable
+                billingManager.queryPurchases()
             }
         })
     }
+
+    private fun setupButtons() {
+        showInterstitialAdButton.setOnClickListener {
+            adsManager.showInterstitial()
+        }
+
+        revokeConsentButton.setOnClickListener {
+            adsManager.resetConsent()
+        }
+
+        removeAdsButton.setOnClickListener {
+            billingManager.launchBillingFlow(purchasedSku)
+        }
+
+        consumePurchaseButton.setOnClickListener {
+            billingPurchases?.firstOrNull()?.let {
+                billingManager.consume(it)
+            }
+        }
+    }
+
+    private fun setupPurchaseButtons(oldPurchases: List<BillingPurchase>?, newPurchases: List<BillingPurchase>?) {
+        val adsRemoved = newPurchases?.contains(purchasedSku) ?: false
+
+        oldPurchases?.let {
+            val alreadyContains = it.contains(purchasedSku)
+
+            if ((adsRemoved && !alreadyContains) || (!adsRemoved && alreadyContains)) {
+                restartActivity()
+            }
+        }
+    }
+
+    private fun restartActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    //endregion
 
 }

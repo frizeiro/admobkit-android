@@ -163,7 +163,7 @@ class BillingManager(activity: Activity) {
 
         billingClient.consumeAsync(consumeParams) { billingResult, outToken ->
             if (billingResult.responseCode == OK) {
-                // TODO: Handle the success of the consume operation.
+                performQueryPurchases()
             }
         }
     }
