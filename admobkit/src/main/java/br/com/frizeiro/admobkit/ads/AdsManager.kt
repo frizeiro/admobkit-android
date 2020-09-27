@@ -57,7 +57,7 @@ class AdsManager(activity: Activity) {
         val activity = activity.get() ?: return
 
         bannerAdView = AdView(activity)
-        bannerAdView?.adUnitId = adUnitId ?: config.defaultBannerAdId
+        bannerAdView?.adUnitId = adUnitId ?: config?.defaultBannerAdId
         containerView.addView(bannerAdView)
 
         // wait until containerView is laid out before we can get the width.
@@ -82,7 +82,7 @@ class AdsManager(activity: Activity) {
         val activity = activity.get() ?: return
 
         interstitialAd = InterstitialAd(activity)
-        interstitialAd?.adUnitId = adUnitId ?: config.defaultBannerAdId
+        interstitialAd?.adUnitId = adUnitId ?: config?.defaultInterstitialAdId
 
         interstitialAd?.adListener = object : AdListener() {
             override fun onAdLoaded() {
@@ -102,7 +102,9 @@ class AdsManager(activity: Activity) {
     }
 
     fun showInterstitial() {
-        if (numberOfInterstitialDisplayed < config.maxOfInterstitialPerSession && interstitialAd?.isLoaded == true) {
+        if (isInitialized && numberOfInterstitialDisplayed < (config?.maxOfInterstitialPerSession
+                ?: 0) && interstitialAd?.isLoaded == true
+        ) {
             interstitialAd?.show()
         }
     }
@@ -135,7 +137,7 @@ class AdsManager(activity: Activity) {
 
     companion object {
 
-        internal lateinit var config: AdsConfig
+        internal var config: AdsConfig? = null
 
         private var isInitialized = false
         private var numberOfInterstitialDisplayed: Int = 0
@@ -157,7 +159,8 @@ class AdsManager(activity: Activity) {
                 return
             }
 
-            if (Companion.config.purchaseSkuForRemovingAds.isNotEmpty()) {
+            val skus = Companion.config?.purchaseSkuForRemovingAds ?: listOf()
+            if (skus.isNotEmpty()) {
                 performQueryPurchases(activity, listener)
             } else {
                 performConsent(activity, listener)
@@ -169,7 +172,8 @@ class AdsManager(activity: Activity) {
 
             billingManager.purchaseListener = object : PurchaseListener {
                 override fun onResult(purchases: List<BillingPurchase>, pending: List<BillingPurchase>) {
-                    if (!purchases.containsAny(config.purchaseSkuForRemovingAds)) {
+                    val skus = config?.purchaseSkuForRemovingAds ?: listOf()
+                    if (!purchases.containsAny(skus)) {
                         performConsent(activity, listener)
                     } else {
                         listener.onUninitialized()
@@ -206,13 +210,13 @@ class AdsManager(activity: Activity) {
         private fun setDebugConfiguration() {
             MobileAds.setRequestConfiguration(
                 RequestConfiguration.Builder()
-                    .setTestDeviceIds(config.testDeviceIDs)
+                    .setTestDeviceIds(config?.testDeviceIDs)
                     .build()
             )
         }
 
         private fun isAllowed(activity: Activity?): Boolean {
-            val postMilliseconds = config.postInstallDelayMinutes * 60 * 1000
+            val postMilliseconds = config?.postInstallDelayMinutes ?: 0 * 60 * 1000
             val installTime = activity?.firstInstallTime ?: 0
 
             return (postMilliseconds + installTime) < System.currentTimeMillis()

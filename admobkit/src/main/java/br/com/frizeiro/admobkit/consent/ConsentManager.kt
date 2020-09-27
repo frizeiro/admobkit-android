@@ -96,12 +96,13 @@ class ConsentManager(activity: Activity) {
 
     private fun setDebugSettings(builder: ConsentRequestParameters.Builder) {
         val activity = activity.get() ?: return
+        val config = AdsManager.config ?: return
 
         val debugBuilder = ConsentDebugSettings.Builder(activity)
-            .setDebugGeography(AdsManager.config.testConsentGeography.debugGeography)
+            .setDebugGeography(config.testConsentGeography.debugGeography)
             .addTestDeviceHashedId(AdRequest.DEVICE_ID_EMULATOR)
 
-        AdsManager.config.testDeviceIDs.forEach {
+        config.testDeviceIDs.forEach {
             debugBuilder.addTestDeviceHashedId(it)
         }
 
