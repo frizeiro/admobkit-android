@@ -216,7 +216,7 @@ class AdsManager(activity: Activity) {
         }
 
         private fun isAllowed(activity: Activity?): Boolean {
-            val postMilliseconds = config?.postInstallDelayMinutes ?: 0 * 60 * 1000
+            val postMilliseconds = (config?.postInstallDelayMinutes ?: 0) * 60 * 1000
             val installTime = activity?.firstInstallTime ?: 0
 
             return (postMilliseconds + installTime) < System.currentTimeMillis()
