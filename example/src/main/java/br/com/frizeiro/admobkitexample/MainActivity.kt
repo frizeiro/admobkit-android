@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     //region Private Views
 
-    private val bannerLayout: FrameLayout by lazy { findViewById(R.id.adContainer) }
+    private val bannerView: FrameLayout by lazy { findViewById(R.id.ad_banner_view) }
 
     private val showInterstitialAdButton: Button by lazy { findViewById(R.id.show_interstitial_ad_button) }
     private val revokeConsentButton: Button by lazy { findViewById(R.id.revoke_consent_button) }
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         // initialize
         AdsManager.initialize(this, config, object : AdsInitializeListener() {
             override fun onInitialize() {
-                adsManager.loadBanner(bannerLayout)
+                adsManager.loadBanner(bannerView)
 
                 adsManager.loadInterstitial {
                     showInterstitialAdButton.isEnabled = true

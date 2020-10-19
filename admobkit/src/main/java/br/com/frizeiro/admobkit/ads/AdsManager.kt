@@ -58,6 +58,13 @@ class AdsManager(activity: Activity) {
 
         bannerAdView = AdView(activity)
         bannerAdView?.adUnitId = adUnitId ?: config?.defaultBannerAdId
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            bannerAdView?.setBackgroundColor(activity.getColor(android.R.color.transparent))
+        } else {
+            bannerAdView?.setBackgroundColor(activity.resources.getColor(android.R.color.transparent))
+        }
+
         containerView.addView(bannerAdView)
 
         // wait until containerView is laid out before we can get the width.
@@ -208,9 +215,15 @@ class AdsManager(activity: Activity) {
         }
 
         private fun setDebugConfiguration() {
+            val devices = mutableListOf(AdRequest.DEVICE_ID_EMULATOR)
+
+            config?.testDeviceIDs?.let {
+                devices.addAll(it)
+            }
+
             MobileAds.setRequestConfiguration(
                 RequestConfiguration.Builder()
-                    .setTestDeviceIds(config?.testDeviceIDs)
+                    .setTestDeviceIds(devices)
                     .build()
             )
         }
