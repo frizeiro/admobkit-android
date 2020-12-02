@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion 16
@@ -33,13 +33,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     // AdMob Ads
-    implementation 'com.google.android.gms:play-services-ads:19.4.0'
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
 
     // User Data Consent
     implementation 'com.google.android.ump:user-messaging-platform:1.0.0'
 
     // In App Billing
-    implementation 'com.android.billingclient:billing-ktx:3.0.1'
+    implementation 'com.android.billingclient:billing-ktx:3.0.2'
 
     // Tests
     testImplementation 'junit:junit:4.12'
