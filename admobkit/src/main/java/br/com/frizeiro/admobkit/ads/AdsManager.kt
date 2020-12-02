@@ -155,7 +155,7 @@ class AdsManager(activity: Activity) {
             setDebugConfiguration()
 
             if (!config.isAllowed || !isAllowed(activity)) {
-                listener.onUninitialized()
+                listener.onFail("Ads is not allowed.")
                 listener.always()
                 return
             }
@@ -183,7 +183,7 @@ class AdsManager(activity: Activity) {
                     if (!purchases.containsAny(skus)) {
                         performConsent(activity, listener)
                     } else {
-                        listener.onUninitialized()
+                        listener.onFail("There are some purchases for removing ads.")
                         listener.always()
                     }
                 }
@@ -198,7 +198,7 @@ class AdsManager(activity: Activity) {
                 if (it) {
                     performInitializeAds(activity, listener)
                 } else {
-                    listener.onUninitialized()
+                    listener.onFail("User data consent could't be requested.")
                     listener.always()
                 }
             }
@@ -206,10 +206,15 @@ class AdsManager(activity: Activity) {
 
         private fun performInitializeAds(activity: Activity, listener: AdsInitializeListener) {
             MobileAds.initialize(activity) {
-                isInitialized = true
-                MobileAds.setAppMuted(true)
+                isInitialized = it.adapterStatusMap.entries.any { entry -> entry.value.initializationState.name == "READY" }
 
-                listener.onInitialize()
+                if (isInitialized) {
+                    MobileAds.setAppMuted(true)
+                    listener.onInitialize()
+                } else {
+                    val first = it.adapterStatusMap.entries.firstOrNull()?.value
+                    listener.onFail(first?.description ?: first?.initializationState?.name ?: "Ads initialization fail.")
+                }
                 listener.always()
             }
         }

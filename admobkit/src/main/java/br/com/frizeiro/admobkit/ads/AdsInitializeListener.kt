@@ -7,7 +7,7 @@ abstract class AdsInitializeListener {
 
     abstract fun onInitialize()
 
-    open fun onUninitialized() {}
+    open fun onFail(message: String) {}
     open fun always() {}
 
 }
