@@ -33,11 +33,7 @@ class ConsentManager(activity: Activity) {
         get() = consentInformation.consentStatus == OBTAINED || consentInformation.consentStatus == NOT_REQUIRED
 
     private val consentRequestParameters: ConsentRequestParameters?
-        get() {
-            val builder = ConsentRequestParameters.Builder()
-            setDebugSettings(builder)
-            return builder.build()
-        }
+        get() = consentBuilder().build()
 
     //endregion
 
@@ -94,9 +90,11 @@ class ConsentManager(activity: Activity) {
         })
     }
 
-    private fun setDebugSettings(builder: ConsentRequestParameters.Builder) {
-        val activity = activity.get() ?: return
-        val config = AdsManager.config ?: return
+    private fun consentBuilder(): ConsentRequestParameters.Builder {
+        val builder = ConsentRequestParameters.Builder()
+
+        val activity = activity.get() ?: return builder
+        val config = AdsManager.config ?: return builder
 
         val debugBuilder = ConsentDebugSettings.Builder(activity)
             .setDebugGeography(config.testConsentGeography.debugGeography)
@@ -107,6 +105,8 @@ class ConsentManager(activity: Activity) {
         }
 
         builder.setConsentDebugSettings(debugBuilder.build())
+
+        return builder
     }
 
     //endregion

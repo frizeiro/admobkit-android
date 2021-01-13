@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.frizeiro.admobkitexample">
+    package="br.com.frizeiro.admobkit">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

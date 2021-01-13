@@ -12,7 +12,7 @@ import br.com.frizeiro.admobkit.billing.BillingManager
 import br.com.frizeiro.admobkit.billing.BillingPurchase
 import br.com.frizeiro.admobkit.billing.PurchaseListener
 import br.com.frizeiro.admobkit.billing.extensions.contains
-import br.com.frizeiro.admobkit.consent.ConsentGeography.NOT_EEA
+import br.com.frizeiro.admobkit.consent.ConsentGeography.EEA
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,11 +65,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         // configs
-        val config = AdsConfig(listOf("AAE412509C1012E2A5242D58CCE0EB14"))
+        val config = AdsConfig(listOf("08A86FCE64670471DDCD4609B7D91BBB"))
         config.defaultBannerAdId = getString(R.string.admobkit_banner_id)
         config.defaultInterstitialAdId = getString(R.string.admobkit_interstitial_id)
         config.purchaseSkuForRemovingAds = listOf(purchasedSku)
-        config.testConsentGeography = NOT_EEA
+        config.testConsentGeography = EEA
 
         // initialize
         AdsManager.initialize(this, config, object : AdsInitializeListener() {
