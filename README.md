@@ -6,7 +6,7 @@ Abstraction library of AdMob Ads, User Data Consent (User Messaging Platform, UM
 ## gradle
 
 Add it in your root `build.gradle` at the end of repositories:
-```
+```gradle
 allprojects {
     repositories {
         ...
@@ -16,15 +16,15 @@ allprojects {
 ```
 
 Add the dependency
-```
+```gradle
 dependencies {
-    implementation 'com.github.frizeiro:admobkit-android:$version'
+    implementation 'com.github.frizeiro:admobkit-android:0.1.6'
 }
 ```
 
 ## maven
 
-```
+```xml
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -34,36 +34,36 @@ dependencies {
 ```
 
 Add the dependency
-```
+```xml
 <dependency>
     <groupId>com.github.frizeiro</groupId>
     <artifactId>admobkit-android</artifactId>
-    <version>$version</version>
+    <version>0.1.6</version>
 </dependency>
 ```
 
 ## sbt
 
 Add it in your `build.sbt` at the end of resolvers:
-```
+```gradle
 resolvers += "jitpack" at "https://jitpack.io"
 ```
 
 Add the dependency
-```
-libraryDependencies += "com.github.frizeiro" % "admobkit-android" % "$version"
+```gradle
+libraryDependencies += "com.github.frizeiro" % "admobkit-android" % "0.1.6"
 ```
 
 ## leiningen
 
 Add it in your `project.clj` at the end of repositories:
-```
+```gradle
  :repositories [["jitpack" "https://jitpack.io"]]
 ```
 
 Add the dependency
-```
-:dependencies [[com.github.frizeiro/admobkit-android "$version"]]
+```gradle
+:dependencies [[com.github.frizeiro/admobkit-android "0.1.6"]]
 ```
 
 # How to use
