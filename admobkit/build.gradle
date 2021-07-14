@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName "0.1.6"
+        versionName "0.1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -29,21 +29,22 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // AndroidX
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
 
     // AdMob Ads
+    // TODO: upgrade to 20.x.x -> https://developers.google.com/admob/android/migration
     implementation 'com.google.android.gms:play-services-ads:19.6.0'
 
     // User Data Consent
-    implementation 'com.google.android.ump:user-messaging-platform:1.0.0'
+    implementation 'com.google.android.ump:user-messaging-platform:2.0.0'
 
     // In App Billing
-    implementation 'com.android.billingclient:billing-ktx:3.0.2'
+    // TODO: upgrade to 4.x.x -> https://developer.android.com/google/play/billing/release-notes
+    implementation 'com.android.billingclient:billing-ktx:3.0.3'
 
     // Tests
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
