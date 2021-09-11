@@ -3,6 +3,7 @@ package br.com.frizeiro.admobkit.ads
 import android.app.Activity
 import android.util.Log
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import br.com.frizeiro.admobkit.ads.AdsBannerType.ADAPTIVE
 import br.com.frizeiro.admobkit.billing.BillingManager
 import br.com.frizeiro.admobkit.billing.BillingPurchase
@@ -18,10 +19,9 @@ import java.lang.ref.WeakReference
 /**
  * Created by Felipe Frizeiro on 29/08/20.
  */
-
 class AdsManager(activity: Activity) {
 
-    //region Public Variables
+    // region Public Variables
 
     val isConsentApplicable: Boolean
         get() = consentManager.isApplicable
@@ -29,9 +29,9 @@ class AdsManager(activity: Activity) {
     val isAllowed: Boolean
         get() = isInitialized && isAllowed(activity.get())
 
-    //endregion
+    // endregion
 
-    //region Private Variables
+    // region Private Variables
 
     private var activity: WeakReference<Activity> = WeakReference(activity)
 
@@ -48,9 +48,9 @@ class AdsManager(activity: Activity) {
     private val interstitialAllowed: Boolean
         get() = numberOfInterstitialDisplayed < (config?.maxOfInterstitialPerSession ?: 0)
 
-    //endregion
+    // endregion
 
-    //region Public Methods
+    // region Public Methods
 
     @JvmOverloads
     fun loadBanner(containerView: FrameLayout, adUnitId: String? = null, type: AdsBannerType = ADAPTIVE) {
@@ -65,12 +65,7 @@ class AdsManager(activity: Activity) {
 
         bannerAdView = AdView(activity)
         bannerAdView?.adUnitId = unitId
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            bannerAdView?.setBackgroundColor(activity.getColor(android.R.color.transparent))
-        } else {
-            bannerAdView?.setBackgroundColor(activity.resources.getColor(android.R.color.transparent))
-        }
+        bannerAdView?.setBackgroundColor(ContextCompat.getColor(activity, android.R.color.transparent))
 
         containerView.addView(bannerAdView)
 
@@ -108,7 +103,7 @@ class AdsManager(activity: Activity) {
                 onLoad?.invoke()
             }
         })
-        
+
     }
 
     fun showInterstitial() {
@@ -141,9 +136,9 @@ class AdsManager(activity: Activity) {
         }
     }
 
-    //endregion
+    // endregion
 
-    //region Private Methods
+    // region Private Methods
 
     private fun interstitialCallback(unitId: String, onLoad: (() -> Unit)?) = object : FullScreenContentCallback() {
         override fun onAdDismissedFullScreenContent() {
@@ -162,9 +157,9 @@ class AdsManager(activity: Activity) {
         }
     }
 
-    //endregion
+    // endregion
 
-    //region Companion Object
+    // region Companion Object
 
     companion object {
 
@@ -265,6 +260,6 @@ class AdsManager(activity: Activity) {
         }
     }
 
-    //endregion
+    // endregion
 
 }

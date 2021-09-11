@@ -16,7 +16,7 @@ import br.com.frizeiro.admobkit.consent.ConsentGeography.EEA
 
 class MainActivity : AppCompatActivity() {
 
-    //region Private Variables
+    // region Private Variables
 
     private val purchasedSku by lazy { getString(R.string.admobkit_purchased_sku) }
 
@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
             field = newValue
         }
 
-    //endregion
+    // endregion
 
-    //region Private Views
+    // region Private Views
 
     private val bannerView: FrameLayout by lazy { findViewById(R.id.ad_banner_view) }
 
@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
     private val removeAdsButton: Button by lazy { findViewById(R.id.remove_ads_button) }
     private val consumePurchaseButton: Button by lazy { findViewById(R.id.consume_purchase_button) }
 
-    //endregion
+    // endregion
 
-    //region Life Cycle
+    // region Life Cycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
         setupAdMobKit()
     }
 
-    //endregion
+    // endregion
 
-    //region Private Methods
+    // region Private Methods
 
     private fun setupAdMobKit() {
         // purchaseListener
@@ -126,6 +126,6 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    //endregion
+    // endregion
 
 }

@@ -7,8 +7,6 @@ import com.android.billingclient.api.SkuDetails
  */
 data class BillingProduct(internal val skuDetails: SkuDetails) {
 
-    // TODO: expose other necessary properties.
-
     val sku: String
         get() = skuDetails.sku
 

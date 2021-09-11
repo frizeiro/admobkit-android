@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "br.com.frizeiro.admobkitexample"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdk 30
         versionCode 1
         versionName "0.1.0"
 

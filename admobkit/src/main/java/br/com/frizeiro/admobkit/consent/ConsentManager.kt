@@ -15,14 +15,14 @@ import java.lang.ref.WeakReference
  */
 class ConsentManager(activity: Activity) {
 
-    //region Public Variables
+    // region Public Variables
 
     val isApplicable: Boolean
         get() = consentInformation.consentStatus == OBTAINED || consentInformation.consentStatus == REQUIRED
 
-    //endregion
+    // endregion
 
-    //region Private Variables
+    // region Private Variables
 
     private var activity: WeakReference<Activity> = WeakReference(activity)
 
@@ -32,12 +32,12 @@ class ConsentManager(activity: Activity) {
     private val consentResult: Boolean
         get() = consentInformation.consentStatus == OBTAINED || consentInformation.consentStatus == NOT_REQUIRED
 
-    private val consentRequestParameters: ConsentRequestParameters?
+    private val consentRequestParameters: ConsentRequestParameters
         get() = consentBuilder().build()
 
-    //endregion
+    // endregion
 
-    //region Public Methods
+    // region Public Methods
 
     fun request(onConsentResult: (Boolean) -> Unit) {
         if (consentInformationUpdated && consentResult) {
@@ -65,9 +65,9 @@ class ConsentManager(activity: Activity) {
         consentInformation.reset()
     }
 
-    //endregion
+    // endregion
 
-    //region Private Methods
+    // region Private Methods
 
     private fun loadForm(onConsent: (Boolean) -> Unit) {
         val activity = activity.get() ?: return
@@ -109,6 +109,6 @@ class ConsentManager(activity: Activity) {
         return builder
     }
 
-    //endregion
+    // endregion
 
 }

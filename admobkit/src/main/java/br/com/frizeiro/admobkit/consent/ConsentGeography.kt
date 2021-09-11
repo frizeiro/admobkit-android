@@ -10,7 +10,7 @@ enum class ConsentGeography {
     EEA,
     NOT_EEA;
 
-    //region Public Variables
+    // region Public Variables
 
     val debugGeography by lazy {
         when (this) {
@@ -20,6 +20,6 @@ enum class ConsentGeography {
         }
     }
 
-    //endregion
+    // endregion
 
 }

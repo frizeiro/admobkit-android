@@ -9,10 +9,11 @@ import com.google.android.gms.ads.AdSize
  * Created by Felipe Frizeiro on 23/08/20.
  */
 enum class AdsBannerType {
+    
     BANNER,
     ADAPTIVE;
 
-    //region Public Methods
+    // region Public Methods
 
     fun size(containerView: FrameLayout, activity: Activity): AdSize {
         return when (this) {
@@ -21,9 +22,9 @@ enum class AdsBannerType {
         }
     }
 
-    //endregion
+    // endregion
 
-    //region Private Methods
+    // region Private Methods
 
     private fun adaptiveSize(containerView: FrameLayout, activity: Activity): AdSize {
         val metrics = Resources.getSystem().displayMetrics
@@ -38,6 +39,6 @@ enum class AdsBannerType {
         return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth)
     }
 
-    //endregion
+    // endregion
 
 }

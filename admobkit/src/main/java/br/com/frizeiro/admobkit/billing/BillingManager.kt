@@ -16,14 +16,14 @@ import java.lang.ref.WeakReference
  */
 class BillingManager(activity: Activity) {
 
-    //region Public Variables
+    // region Public Variables
 
     var purchaseListener: PurchaseListener? = null
     var productsListener: ProductsListener? = null
 
-    //endregion
+    // endregion
 
-    //region Private Variables
+    // region Private Variables
 
     private var activity: WeakReference<Activity> = WeakReference(activity)
 
@@ -34,9 +34,9 @@ class BillingManager(activity: Activity) {
             .build()
     }
 
-    //endregion
+    // endregion
 
-    //region Public Methods
+    // region Public Methods
 
     @JvmOverloads
     fun startConnection(listener: BillingConnectionListener? = null) {
@@ -101,9 +101,9 @@ class BillingManager(activity: Activity) {
         }
     }
 
-    //endregion
+    // endregion
 
-    //region Private Methods
+    // region Private Methods
 
     private fun ensureConnection(onSuccess: () -> Unit) {
         startConnection(object : BillingConnectionListener() {
@@ -206,9 +206,9 @@ class BillingManager(activity: Activity) {
             }
             SERVICE_DISCONNECTED -> startConnection()
             else -> queryPurchases()
-
         }
     }
 
-    //endregion
+    // endregion
+
 }
