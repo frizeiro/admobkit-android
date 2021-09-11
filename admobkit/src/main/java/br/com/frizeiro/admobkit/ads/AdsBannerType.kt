@@ -10,7 +10,6 @@ import com.google.android.gms.ads.AdSize
  */
 enum class AdsBannerType {
     BANNER,
-    SMART_BANNER,
     ADAPTIVE;
 
     //region Public Methods
@@ -18,7 +17,6 @@ enum class AdsBannerType {
     fun size(containerView: FrameLayout, activity: Activity): AdSize {
         return when (this) {
             BANNER -> AdSize.BANNER
-            SMART_BANNER -> AdSize.SMART_BANNER
             ADAPTIVE -> adaptiveSize(containerView, activity)
         }
     }

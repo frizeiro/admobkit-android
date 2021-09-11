@@ -1,6 +1,7 @@
 package br.com.frizeiro.admobkit.ads
 
 import android.app.Activity
+import android.util.Log
 import android.widget.FrameLayout
 import br.com.frizeiro.admobkit.ads.AdsBannerType.ADAPTIVE
 import br.com.frizeiro.admobkit.billing.BillingManager
@@ -10,6 +11,8 @@ import br.com.frizeiro.admobkit.billing.extensions.containsAny
 import br.com.frizeiro.admobkit.consent.ConsentManager
 import br.com.frizeiro.admobkit.extensions.firstInstallTime
 import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import java.lang.ref.WeakReference
 
 /**
@@ -42,6 +45,9 @@ class AdsManager(activity: Activity) {
     private val adRequest: AdRequest
         get() = AdRequest.Builder().build()
 
+    private val interstitialAllowed: Boolean
+        get() = numberOfInterstitialDisplayed < (config?.maxOfInterstitialPerSession ?: 0)
+
     //endregion
 
     //region Public Methods
@@ -55,9 +61,10 @@ class AdsManager(activity: Activity) {
         }
 
         val activity = activity.get() ?: return
+        val unitId = (adUnitId ?: config?.defaultBannerAdId) ?: return
 
         bannerAdView = AdView(activity)
-        bannerAdView?.adUnitId = adUnitId ?: config?.defaultBannerAdId
+        bannerAdView?.adUnitId = unitId
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             bannerAdView?.setBackgroundColor(activity.getColor(android.R.color.transparent))
@@ -82,37 +89,33 @@ class AdsManager(activity: Activity) {
     fun loadInterstitial(adUnitId: String? = null, onLoad: (() -> Unit)? = null) {
         // Reference: https://developers.google.com/admob/android/interstitial
 
-        if (!isInitialized || interstitialAd?.isLoaded == true) {
+        if (!isInitialized || interstitialAd != null || !interstitialAllowed) {
             return
         }
 
         val activity = activity.get() ?: return
+        val unitId = (adUnitId ?: config?.defaultInterstitialAdId) ?: return
 
-        interstitialAd = InterstitialAd(activity)
-        interstitialAd?.adUnitId = adUnitId ?: config?.defaultInterstitialAdId
+        InterstitialAd.load(activity, unitId, adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d("ADMOBKIT", "Ad failed to load.")
+                interstitialAd = null
+            }
 
-        interstitialAd?.adListener = object : AdListener() {
-            override fun onAdLoaded() {
+            override fun onAdLoaded(adLoaded: InterstitialAd) {
+                interstitialAd = adLoaded
+                interstitialAd?.fullScreenContentCallback = interstitialCallback(unitId, onLoad)
                 onLoad?.invoke()
             }
-
-            override fun onAdOpened() {
-                numberOfInterstitialDisplayed++
-            }
-
-            override fun onAdClosed() {
-                interstitialAd?.loadAd(adRequest)
-            }
-        }
-
-        interstitialAd?.loadAd(adRequest)
+        })
+        
     }
 
     fun showInterstitial() {
-        if (isInitialized && numberOfInterstitialDisplayed < (config?.maxOfInterstitialPerSession
-                ?: 0) && interstitialAd?.isLoaded == true
-        ) {
-            interstitialAd?.show()
+        val activity = activity.get() ?: return
+
+        if (isInitialized && interstitialAllowed && interstitialAd != null) {
+            interstitialAd?.show(activity)
         }
     }
 
@@ -135,6 +138,27 @@ class AdsManager(activity: Activity) {
             if (it) {
                 resume()
             }
+        }
+    }
+
+    //endregion
+
+    //region Private Methods
+
+    private fun interstitialCallback(unitId: String, onLoad: (() -> Unit)?) = object : FullScreenContentCallback() {
+        override fun onAdDismissedFullScreenContent() {
+            Log.d("ADMOBKIT", "Ad dismissed fullscreen content.")
+            loadInterstitial(unitId, onLoad)
+        }
+
+        override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            Log.d("ADMOBKIT", "Ad failed to show.")
+        }
+
+        override fun onAdShowedFullScreenContent() {
+            Log.d("ADMOBKIT", "Ad showed fullscreen content.")
+            numberOfInterstitialDisplayed++
+            interstitialAd = null
         }
     }
 
