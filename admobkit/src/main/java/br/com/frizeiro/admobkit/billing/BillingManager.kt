@@ -87,8 +87,10 @@ class BillingManager(activity: Activity) {
     @JvmName("launchBillingFlowSku")
     fun launchBillingFlow(sku: String) {
         ensureConnection {
-            performQuerySkuDetails(listOf(sku)) {
-                performLaunchBillingFlow(it.first())
+            performQuerySkuDetails(listOf(sku)) { skuDetails ->
+                skuDetails.firstOrNull()?.let {
+                    performLaunchBillingFlow(it)
+                }
             }
         }
     }

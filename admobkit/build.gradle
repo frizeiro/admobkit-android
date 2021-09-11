@@ -39,8 +39,7 @@ dependencies {
     implementation 'com.google.android.ump:user-messaging-platform:2.0.0'
 
     // In App Billing
-    // TODO: upgrade to 4.x.x -> https://developer.android.com/google/play/billing/release-notes
-    implementation 'com.android.billingclient:billing-ktx:3.0.3'
+    implementation 'com.android.billingclient:billing-ktx:4.0.0'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

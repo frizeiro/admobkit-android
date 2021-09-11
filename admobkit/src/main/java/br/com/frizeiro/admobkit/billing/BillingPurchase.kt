@@ -7,9 +7,7 @@ import com.android.billingclient.api.Purchase
  */
 data class BillingPurchase(internal val purchase: Purchase) {
 
-    // TODO: expose other necessary properties.
-
-    val sku: String
-        get() = purchase.sku
+    val skus: List<String>
+        get() = purchase.skus
 
 }
