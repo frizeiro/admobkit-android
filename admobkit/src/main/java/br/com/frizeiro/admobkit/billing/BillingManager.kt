@@ -114,10 +114,10 @@ class BillingManager(activity: Activity) {
     }
 
     private fun performQueryPurchases() {
-        val result = billingClient.queryPurchases(INAPP)
-
-        result.purchasesList?.let {
-            handlePurchases(it)
+        billingClient.queryPurchasesAsync(INAPP) { billingResult, list ->
+            if (billingResult.responseCode == OK) {
+                handlePurchases(list)
+            }
         }
     }
 
