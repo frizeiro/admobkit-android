@@ -76,7 +76,7 @@ class AdsManager(activity: Activity) {
             if (!bannerLayoutComplete) {
                 bannerLayoutComplete = true
 
-                bannerAdView?.adSize = type.size(adsBannerView, activity)
+                bannerAdView?.setAdSize(type.size(adsBannerView, activity))
                 bannerAdView?.loadAd(adRequest)
             }
         }

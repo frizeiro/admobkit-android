@@ -1,7 +1,7 @@
 package br.com.frizeiro.admobkit.ads.model
 
 import br.com.frizeiro.admobkit.consent.ConsentGeography
-import br.com.frizeiro.admobkit.consent.ConsentGeography.DISABLED
+import br.com.frizeiro.admobkit.consent.ConsentGeography.NOT_EEA
 
 /**
  * Created by Felipe Frizeiro on 23/08/20.
@@ -15,5 +15,5 @@ data class AdsConfig(
     var postInstallDelayMinutes: Int = 0
     var maxOfInterstitialPerSession: Int = 999
     var isAllowed: Boolean = true
-    var testConsentGeography: ConsentGeography = DISABLED
+    var testConsentGeography: ConsentGeography = NOT_EEA
 }
