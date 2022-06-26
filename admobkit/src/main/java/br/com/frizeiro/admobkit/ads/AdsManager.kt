@@ -2,9 +2,11 @@ package br.com.frizeiro.admobkit.ads
 
 import android.app.Activity
 import android.util.Log
-import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import br.com.frizeiro.admobkit.ads.AdsBannerType.ADAPTIVE
+import br.com.frizeiro.admobkit.ads.model.AdsBannerType
+import br.com.frizeiro.admobkit.ads.model.AdsBannerType.ADAPTIVE
+import br.com.frizeiro.admobkit.ads.model.AdsConfig
+import br.com.frizeiro.admobkit.ads.ui.AdsBannerView
 import br.com.frizeiro.admobkit.billing.BillingManager
 import br.com.frizeiro.admobkit.billing.BillingPurchase
 import br.com.frizeiro.admobkit.billing.PurchaseListener
@@ -53,7 +55,7 @@ class AdsManager(activity: Activity) {
     // region Public Methods
 
     @JvmOverloads
-    fun loadBanner(containerView: FrameLayout, adUnitId: String? = null, type: AdsBannerType = ADAPTIVE) {
+    fun loadBanner(adsBannerView: AdsBannerView, adUnitId: String? = null, type: AdsBannerType = ADAPTIVE) {
         // Reference: https://developers.google.com/admob/android/banner
 
         if (!isInitialized) {
@@ -67,14 +69,14 @@ class AdsManager(activity: Activity) {
         bannerAdView?.adUnitId = unitId
         bannerAdView?.setBackgroundColor(ContextCompat.getColor(activity, android.R.color.transparent))
 
-        containerView.addView(bannerAdView)
+        adsBannerView.add(bannerAdView)
 
         // wait until containerView is laid out before we can get the width.
-        containerView.viewTreeObserver.addOnGlobalLayoutListener {
+        adsBannerView.addOnGlobalLayoutListener {
             if (!bannerLayoutComplete) {
                 bannerLayoutComplete = true
 
-                bannerAdView?.adSize = type.size(containerView, activity)
+                bannerAdView?.adSize = type.size(adsBannerView, activity)
                 bannerAdView?.loadAd(adRequest)
             }
         }
@@ -146,7 +148,7 @@ class AdsManager(activity: Activity) {
             loadInterstitial(unitId, onLoad)
         }
 
-        override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
             Log.d("ADMOBKIT", "Ad failed to show.")
         }
 

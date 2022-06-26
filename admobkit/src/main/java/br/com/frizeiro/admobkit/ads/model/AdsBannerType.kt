@@ -1,24 +1,25 @@
-package br.com.frizeiro.admobkit.ads
+package br.com.frizeiro.admobkit.ads.model
 
 import android.app.Activity
 import android.content.res.Resources
-import android.widget.FrameLayout
+import br.com.frizeiro.admobkit.ads.ui.AdsBannerView
 import com.google.android.gms.ads.AdSize
+import kotlinx.android.synthetic.main.admobkit_banner_view.view.*
 
 /**
  * Created by Felipe Frizeiro on 23/08/20.
  */
 enum class AdsBannerType {
-    
+
     BANNER,
     ADAPTIVE;
 
     // region Public Methods
 
-    fun size(containerView: FrameLayout, activity: Activity): AdSize {
+    fun size(adsBannerView: AdsBannerView, activity: Activity): AdSize {
         return when (this) {
             BANNER -> AdSize.BANNER
-            ADAPTIVE -> adaptiveSize(containerView, activity)
+            ADAPTIVE -> adaptiveSize(adsBannerView, activity)
         }
     }
 
@@ -26,10 +27,11 @@ enum class AdsBannerType {
 
     // region Private Methods
 
-    private fun adaptiveSize(containerView: FrameLayout, activity: Activity): AdSize {
+    private fun adaptiveSize(adsBannerView: AdsBannerView, activity: Activity): AdSize {
+        val container = adsBannerView.container
         val metrics = Resources.getSystem().displayMetrics
 
-        var adWidthPixels = containerView.width.toFloat()
+        var adWidthPixels = container.width.toFloat()
         if (adWidthPixels == 0f) {
             adWidthPixels = metrics.widthPixels.toFloat()
         }

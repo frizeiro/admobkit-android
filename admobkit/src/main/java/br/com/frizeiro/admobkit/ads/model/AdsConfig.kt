@@ -1,4 +1,4 @@
-package br.com.frizeiro.admobkit.ads
+package br.com.frizeiro.admobkit.ads.model
 
 import br.com.frizeiro.admobkit.consent.ConsentGeography
 import br.com.frizeiro.admobkit.consent.ConsentGeography.DISABLED
