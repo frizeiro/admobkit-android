@@ -3,11 +3,11 @@ package br.com.frizeiro.admobkitexample
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import br.com.frizeiro.admobkit.ads.AdsConfig
 import br.com.frizeiro.admobkit.ads.AdsInitializeListener
 import br.com.frizeiro.admobkit.ads.AdsManager
+import br.com.frizeiro.admobkit.ads.model.AdsConfig
+import br.com.frizeiro.admobkit.ads.ui.AdsBannerView
 import br.com.frizeiro.admobkit.billing.BillingManager
 import br.com.frizeiro.admobkit.billing.BillingPurchase
 import br.com.frizeiro.admobkit.billing.PurchaseListener
@@ -33,8 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     // region Private Views
 
-    private val bannerView: FrameLayout by lazy { findViewById(R.id.ad_banner_view) }
-
+    private val bannerView by lazy { findViewById<AdsBannerView>(R.id.ad_banner_view) }
     private val showInterstitialAdButton: Button by lazy { findViewById(R.id.show_interstitial_ad_button) }
     private val revokeConsentButton: Button by lazy { findViewById(R.id.revoke_consent_button) }
     private val removeAdsButton: Button by lazy { findViewById(R.id.remove_ads_button) }

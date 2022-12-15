@@ -38,7 +38,7 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <br.com.frizeiro.admobkit.ads.ui.AdsBannerView
             android:id="@+id/ad_banner_view"
             style="@style/AdsManager.BannerView" />
 

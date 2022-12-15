@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="br.com.frizeiro.admobkitexample.MainActivity">
+        <activity
+            android:name="br.com.frizeiro.admobkitexample.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
