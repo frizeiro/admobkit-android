@@ -2,9 +2,10 @@ package br.com.frizeiro.admobkit.ads.model
 
 import android.app.Activity
 import android.content.res.Resources
+import android.widget.FrameLayout
+import br.com.frizeiro.admobkit.R
 import br.com.frizeiro.admobkit.ads.ui.AdsBannerView
 import com.google.android.gms.ads.AdSize
-import kotlinx.android.synthetic.main.admobkit_banner_view.view.*
 
 /**
  * Created by Felipe Frizeiro on 23/08/20.
@@ -28,7 +29,7 @@ enum class AdsBannerType {
     // region Private Methods
 
     private fun adaptiveSize(adsBannerView: AdsBannerView, activity: Activity): AdSize {
-        val container = adsBannerView.container
+        val container = adsBannerView.findViewById<FrameLayout>(R.id.container)
         val metrics = Resources.getSystem().displayMetrics
 
         var adWidthPixels = container.width.toFloat()
