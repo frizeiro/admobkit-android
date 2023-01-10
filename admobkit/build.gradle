@@ -40,6 +40,7 @@ dependencies {
 
     // AdMob Mediation
     implementation 'com.google.ads.mediation:facebook:6.12.0.0'
+    implementation 'com.google.ads.mediation:inmobi:10.1.2.1'
 
     // User Data Consent
     implementation 'com.google.android.ump:user-messaging-platform:2.0.0'
