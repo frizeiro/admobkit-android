@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.frizeiro.admobkit.ads.AdsInitializeListener
 import br.com.frizeiro.admobkit.ads.AdsManager
 import br.com.frizeiro.admobkit.ads.model.AdsConfig
+import br.com.frizeiro.admobkit.ads.model.AdsDeviceIDs
 import br.com.frizeiro.admobkit.ads.ui.AdsBannerView
 import br.com.frizeiro.admobkit.billing.BillingManager
 import br.com.frizeiro.admobkit.billing.BillingPurchase
@@ -64,7 +65,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         // configs
-        val config = AdsConfig(listOf("08A86FCE64670471DDCD4609B7D91BBB"))
+        val ids = AdsDeviceIDs(
+            admob = listOf(
+                "0F1B54AE43758E24205DFECFFD517AF5" // Redmi
+            ),
+            facebook = listOf(
+                "0e2b59ed-9ede-45ef-bfe5-1618f9188b12" // Redmi
+            )
+        )
+
+        val config = AdsConfig(testDeviceIDs = ids)
         config.defaultBannerAdId = getString(R.string.admobkit_banner_id)
         config.defaultInterstitialAdId = getString(R.string.admobkit_interstitial_id)
         config.purchaseSkuForRemovingAds = listOf(purchasedSku)

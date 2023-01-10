@@ -7,7 +7,7 @@ import br.com.frizeiro.admobkit.consent.ConsentGeography.NOT_EEA
  * Created by Felipe Frizeiro on 23/08/20.
  */
 data class AdsConfig(
-    var testDeviceIDs: List<String>
+    var testDeviceIDs: AdsDeviceIDs,
 ) {
     var defaultBannerAdId: String? = null
     var defaultInterstitialAdId: String? = null

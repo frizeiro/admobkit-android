@@ -38,6 +38,9 @@ dependencies {
     // AdMob Ads
     implementation 'com.google.android.gms:play-services-ads:21.4.0'
 
+    // AdMob Mediation
+    implementation 'com.google.ads.mediation:facebook:6.12.0.0'
+
     // User Data Consent
     implementation 'com.google.android.ump:user-messaging-platform:2.0.0'
 

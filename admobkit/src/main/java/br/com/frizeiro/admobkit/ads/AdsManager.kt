@@ -243,7 +243,7 @@ class AdsManager(activity: Activity) {
         private fun setDebugConfiguration() {
             val devices = mutableListOf(AdRequest.DEVICE_ID_EMULATOR)
 
-            config?.testDeviceIDs?.let {
+            config?.testDeviceIDs?.admob?.let {
                 devices.addAll(it)
             }
 

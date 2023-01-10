@@ -3,11 +3,13 @@ package br.com.frizeiro.admobkit.consent
 import android.app.Activity
 import android.util.Log
 import br.com.frizeiro.admobkit.ads.AdsManager
+import com.facebook.ads.AdSettings
 import com.google.android.gms.ads.AdRequest
 import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentInformation.ConsentStatus.*
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
+import com.inmobi.sdk.InMobiSdk
 import java.lang.ref.WeakReference
 
 /**
@@ -100,8 +102,12 @@ class ConsentManager(activity: Activity) {
             .setDebugGeography(config.testConsentGeography.debugGeography)
             .addTestDeviceHashedId(AdRequest.DEVICE_ID_EMULATOR)
 
-        config.testDeviceIDs.forEach {
+        config.testDeviceIDs.admob.forEach {
             debugBuilder.addTestDeviceHashedId(it)
+        }
+
+        config.testDeviceIDs.facebook.forEach {
+            AdSettings.addTestDevice(it)
         }
 
         builder.setConsentDebugSettings(debugBuilder.build())
