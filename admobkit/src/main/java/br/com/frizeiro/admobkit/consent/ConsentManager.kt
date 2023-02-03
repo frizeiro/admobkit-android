@@ -3,19 +3,31 @@ package br.com.frizeiro.admobkit.consent
 import android.app.Activity
 import android.util.Log
 import br.com.frizeiro.admobkit.ads.AdsManager
+import br.com.frizeiro.admobkit.extensions.add
+import br.com.frizeiro.admobkit.extensions.firstInstallTime
+import br.com.frizeiro.admobkit.extensions.preferencesManager
+import br.com.frizeiro.admobkit.support.PreferencesManager
 import com.facebook.ads.AdSettings
 import com.google.android.gms.ads.AdRequest
 import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentInformation.ConsentStatus.*
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
-import com.inmobi.sdk.InMobiSdk
 import java.lang.ref.WeakReference
+import java.util.*
 
 /**
  * Created by Felipe Frizeiro on 29/08/20.
  */
 class ConsentManager(activity: Activity) {
+
+    // region Companion Object
+
+    companion object {
+        private const val LAST_CONSENT_TIME = "PREF_LAST_CONSENT"
+    }
+
+    // endregion
 
     // region Public Variables
 
@@ -37,6 +49,9 @@ class ConsentManager(activity: Activity) {
     private val consentRequestParameters: ConsentRequestParameters
         get() = consentBuilder().build()
 
+    private val preferences: PreferencesManager?
+        get() = activity.get()?.preferencesManager
+
     // endregion
 
     // region Public Methods
@@ -48,6 +63,10 @@ class ConsentManager(activity: Activity) {
         }
 
         val activity = activity.get() ?: return onConsentResult(consentResult)
+
+        if (endOfConsentTime()) {
+            reset()
+        }
 
         consentInformation.requestConsentInfoUpdate(activity, consentRequestParameters, {
             consentInformationUpdated = true
@@ -77,9 +96,10 @@ class ConsentManager(activity: Activity) {
         UserMessagingPlatform.loadConsentForm(activity, { consentForm ->
             if (consentInformation.consentStatus == REQUIRED) {
                 consentForm.show(activity) { error ->
-                    error?.let {
+                    if (error != null) {
                         loadForm(onConsent)
-                    } ?: run {
+                    } else {
+                        updateConsentTime()
                         onConsent(consentResult)
                     }
                 }
@@ -113,6 +133,15 @@ class ConsentManager(activity: Activity) {
         builder.setConsentDebugSettings(debugBuilder.build())
 
         return builder
+    }
+
+    private fun updateConsentTime() {
+        preferences?.save(LAST_CONSENT_TIME, Date().time)
+    }
+
+    private fun endOfConsentTime(): Boolean {
+        val last = preferences?.getLong(LAST_CONSENT_TIME) ?: activity.get()?.firstInstallTime ?: Date().time
+        return last <= Date().add(-1, Calendar.YEAR).time
     }
 
     // endregion

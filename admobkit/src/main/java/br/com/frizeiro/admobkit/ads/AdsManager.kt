@@ -219,7 +219,7 @@ class AdsManager(activity: Activity) {
                 if (it) {
                     performInitializeAds(activity, listener)
                 } else {
-                    listener.onFail("User data consent could't be requested.")
+                    listener.onFail("User data consent couldn't be requested.")
                     listener.always()
                 }
             }
