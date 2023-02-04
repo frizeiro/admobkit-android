@@ -18,7 +18,7 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-    implementation 'com.github.frizeiro:admobkit-android:0.4.1'
+    implementation 'com.github.frizeiro:admobkit-android:0.4.2'
 }
 ```
 
@@ -38,7 +38,7 @@ Add the dependency
 <dependency>
     <groupId>com.github.frizeiro</groupId>
     <artifactId>admobkit-android</artifactId>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
 </dependency>
 ```
 
@@ -51,7 +51,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 
 Add the dependency
 ```gradle
-libraryDependencies += "com.github.frizeiro" % "admobkit-android" % "0.4.1"
+libraryDependencies += "com.github.frizeiro" % "admobkit-android" % "0.4.2"
 ```
 
 ## leiningen
@@ -63,7 +63,7 @@ Add it in your `project.clj` at the end of repositories:
 
 Add the dependency
 ```gradle
-:dependencies [[com.github.frizeiro/admobkit-android "0.4.1"]]
+:dependencies [[com.github.frizeiro/admobkit-android "0.4.2"]]
 ```
 
 # How to use
