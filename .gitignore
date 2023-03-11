@@ -87,3 +87,6 @@ lint/tmp/
 
 # MacOS
 .DS_Store
+
+# Custom
+admobkit/src/debug/res/values/admobkit.xml
