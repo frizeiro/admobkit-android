@@ -1,16 +1,34 @@
-# admobkit-android
-Abstraction library of AdMob Ads, User Data Consent (User Messaging Platform, UMP) and In App Purchase (Google Play Billing) for easy integration into your Android app.
+# AdMobKit for Android
+
+Abstraction library of AdMob Ads, User Data Consent (User Messaging Platform - UMP), In App Purchase (Google Play Billing) and Open Bidding (Mediation) for easy integration into your Android app.
+
+## References
+
+* [Google AdMob](https://developers.google.com/admob/android)
+* [User Messaging Platform (UMP)](https://developers.google.com/admob/android/privacy)
+* [Google Play Billing (In App Purchase)](https://developer.android.com/google/play/billing/integrate)
+* [AdMob Open Bidding (Mediation)](https://admob.google.com/home/bidding/what-is-bidding/)
+
+# AdMob Open Bidding (Mediation)
+
+You'll need to create accounts for each platform. Please, take a look at Google AdMob's references:
+* [Meta (Facebook)](https://developers.google.com/admob/android/mediation/meta)
+* [Pangle (Tik Tok)](https://developers.google.com/admob/android/mediation/pangle)
+* [InMobi](https://developers.google.com/admob/android/mediation/inmobi) (coming soon)
+* [AppLovin](https://developers.google.com/admob/android/mediation/applovin) (coming soon)
+* [Liftoff Monetize (Vungle)](https://developers.google.com/admob/android/mediation/vungle) (coming soon)
 
 # How to install
 
 ## gradle
 
-Add it in your root `build.gradle` at the end of repositories:
+Add these lines in your project's root `build.gradle` at the `repositories` path:
 ```gradle
 allprojects {
     repositories {
         ...
         maven { url 'https://jitpack.io' }
+        maven { url 'https://artifact.bytedance.com/repository/pangle' }
     }
 }
 ```
@@ -18,52 +36,8 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-    implementation 'com.github.frizeiro:admobkit-android:0.4.2'
+    implementation 'com.github.frizeiro:admobkit-android:0.5.0'
 }
-```
-
-## maven
-
-```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-
-Add the dependency
-```xml
-<dependency>
-    <groupId>com.github.frizeiro</groupId>
-    <artifactId>admobkit-android</artifactId>
-    <version>0.4.2</version>
-</dependency>
-```
-
-## sbt
-
-Add it in your `build.sbt` at the end of resolvers:
-```gradle
-resolvers += "jitpack" at "https://jitpack.io"
-```
-
-Add the dependency
-```gradle
-libraryDependencies += "com.github.frizeiro" % "admobkit-android" % "0.4.2"
-```
-
-## leiningen
-
-Add it in your `project.clj` at the end of repositories:
-```gradle
- :repositories [["jitpack" "https://jitpack.io"]]
-```
-
-Add the dependency
-```gradle
-:dependencies [[com.github.frizeiro/admobkit-android "0.4.2"]]
 ```
 
 # How to use
