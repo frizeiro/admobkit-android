@@ -18,7 +18,7 @@ allprojects {
         google()
         mavenCentral()
         maven {
-            url 'https://artifact.bytedance.com/repository/pangle/'
+            url 'https://artifact.bytedance.com/repository/pangle'
         }
     }
 }
