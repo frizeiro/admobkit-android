@@ -4,13 +4,11 @@ apply plugin: 'kotlin-android'
 android {
     namespace "br.com.frizeiro.admobkit"
     compileSdkVersion 33
-    buildToolsVersion "30.0.3"
+    buildToolsVersion "33.0.2"
 
     defaultConfig {
         minSdkVersion 19
         targetSdk 33
-        versionCode 1
-        versionName "0.5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
