@@ -1,6 +1,8 @@
 package br.com.frizeiro.admobkit.ads
 
 import android.app.Activity
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.core.content.ContextCompat
 import br.com.frizeiro.admobkit.ads.model.AdsBannerType
@@ -39,6 +41,7 @@ class AdsManager(activity: Activity) {
 
     private val consentManager by lazy { ConsentManager(activity) }
 
+    private var isResumed: Boolean = false
     private var bannerLayoutComplete: Boolean = false
     private var bannerAdView: AdView? = null
 
@@ -108,20 +111,25 @@ class AdsManager(activity: Activity) {
 
     }
 
-    fun showInterstitial() {
+    @JvmOverloads
+    fun showInterstitial(delayMillis: Long = 0) {
         val activity = activity.get() ?: return
 
         if (isInitialized && interstitialAllowed && interstitialAd != null) {
-            interstitialAd?.show(activity)
+            postDelayed({
+                interstitialAd?.show(activity)
+            }, delayMillis)
         }
     }
 
-    fun pause() {
-        bannerAdView?.pause()
+    fun resume() {
+        isResumed = true
+        bannerAdView?.resume()
     }
 
-    fun resume() {
-        bannerAdView?.resume()
+    fun pause() {
+        isResumed = false
+        bannerAdView?.pause()
     }
 
     fun destroy() {
@@ -156,6 +164,20 @@ class AdsManager(activity: Activity) {
             Log.d("ADMOBKIT", "Ad showed fullscreen content.")
             numberOfInterstitialDisplayed++
             interstitialAd = null
+        }
+    }
+
+    private fun postDelayed(handler: () -> Unit, delayMillis: Long) {
+        if (delayMillis == 0L) {
+            if (isResumed) {
+                handler()
+            }
+        } else {
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (isResumed) {
+                    handler()
+                }
+            }, delayMillis)
         }
     }
 
@@ -260,6 +282,7 @@ class AdsManager(activity: Activity) {
 
             return (postMilliseconds + installTime) < System.currentTimeMillis()
         }
+
     }
 
     // endregion
