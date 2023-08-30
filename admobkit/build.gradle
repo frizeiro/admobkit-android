@@ -3,12 +3,11 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace "br.com.frizeiro.admobkit"
-    compileSdkVersion 33
-    buildToolsVersion "33.0.2"
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 19
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -24,28 +23,37 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = 11
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // AndroidX
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // AdMob Ads
-    implementation 'com.google.android.gms:play-services-ads:21.5.0'
+    implementation 'com.google.android.gms:play-services-ads:22.3.0'
 
     // AdMob Mediation
     // implementation 'com.google.ads.mediation:inmobi:10.5.4.0'
-    implementation 'com.google.ads.mediation:facebook:6.12.0.0'
-    implementation 'com.google.ads.mediation:pangle:5.0.0.8.0'
+    implementation 'com.google.ads.mediation:facebook:6.15.0.0'
+    implementation 'com.google.ads.mediation:pangle:5.3.0.4.0'
 
     // User Data Consent
-    implementation 'com.google.android.ump:user-messaging-platform:2.0.0'
+    implementation 'com.google.android.ump:user-messaging-platform:2.1.0'
 
     // In App Billing
-    implementation 'com.android.billingclient:billing-ktx:5.1.0'
+    implementation 'com.android.billingclient:billing-ktx:6.0.1'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

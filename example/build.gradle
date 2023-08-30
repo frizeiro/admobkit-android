@@ -3,15 +3,14 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace "br.com.frizeiro.admobkitexample"
-    compileSdkVersion 33
-    buildToolsVersion "33.0.2"
+    compileSdk 34
 
     defaultConfig {
         applicationId "br.com.frizeiro.admobkitexample"
         minSdkVersion 19
-        targetSdk 33
+        targetSdk 34
         versionCode 1
-        versionName "0.5.2"
+        versionName "0.5.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -29,13 +28,22 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = 11
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // AndroidX
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.multidex:multidex:2.0.1'
