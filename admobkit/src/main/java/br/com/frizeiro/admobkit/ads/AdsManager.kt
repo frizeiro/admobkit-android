@@ -168,15 +168,13 @@ class AdsManager(activity: Activity) {
     }
 
     private fun postDelayed(handler: () -> Unit, delayMillis: Long) {
+        if (!isResumed) return
+
         if (delayMillis == 0L) {
-            if (isResumed) {
-                handler()
-            }
+            handler()
         } else {
             Handler(Looper.getMainLooper()).postDelayed({
-                if (isResumed) {
-                    handler()
-                }
+                handler()
             }, delayMillis)
         }
     }

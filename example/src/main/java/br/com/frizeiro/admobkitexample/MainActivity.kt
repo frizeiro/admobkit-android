@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     private val purchasedSku by lazy { getString(R.string.admobkit_purchased_sku) }
 
-    private val adsManager: AdsManager = AdsManager(this)
-    private val billingManager: BillingManager = BillingManager(this)
+    private val adsManager = AdsManager(this)
+    private val billingManager = BillingManager(this)
 
     private var billingPurchases: List<BillingPurchase>? = null
         set(newValue) {
@@ -52,6 +52,16 @@ class MainActivity : AppCompatActivity() {
         setupAdMobKit()
     }
 
+    override fun onResume() {
+        super.onResume()
+        adsManager.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        adsManager.pause()
+    }
+
     // endregion
 
     // region Private Methods
@@ -67,7 +77,8 @@ class MainActivity : AppCompatActivity() {
         // configs
         val ids = AdsDeviceIDs(
             admob = listOf(
-                "0F1B54AE43758E24205DFECFFD517AF5" // Redmi
+                "0F1B54AE43758E24205DFECFFD517AF5", // Redmi
+                "044386AA23A3AAF7D17383A65C869C67"
             ),
             facebook = listOf(
                 "1004585d-8f08-44ed-9fdd-aecbc4c0046d" // Redmi
