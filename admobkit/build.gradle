@@ -38,22 +38,22 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // AndroidX
-    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.core:core-ktx:1.15.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
 
     // AdMob Ads
-    implementation 'com.google.android.gms:play-services-ads:23.3.0'
+    implementation 'com.google.android.gms:play-services-ads:23.5.0'
 
     // AdMob Mediation
     // implementation 'com.google.ads.mediation:inmobi:10.5.4.0'
-    implementation 'com.google.ads.mediation:facebook:6.17.0.0'
-    implementation 'com.google.ads.mediation:pangle:6.2.0.5.0'
+    implementation 'com.google.ads.mediation:facebook:6.18.0.0'
+    implementation 'com.google.ads.mediation:pangle:6.3.0.4.0'
 
     // User Data Consent
-    implementation 'com.google.android.ump:user-messaging-platform:3.0.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.1.0'
 
     // In App Billing
-    implementation 'com.android.billingclient:billing-ktx:7.0.0'
+    implementation 'com.android.billingclient:billing-ktx:7.1.1'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

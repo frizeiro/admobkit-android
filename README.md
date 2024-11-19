@@ -36,7 +36,7 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-    implementation 'com.github.frizeiro:admobkit-android:0.6.0'
+    implementation 'com.github.frizeiro:admobkit-android:0.6.1'
 }
 ```
 
