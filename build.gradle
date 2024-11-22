@@ -13,16 +13,6 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url 'https://artifact.bytedance.com/repository/pangle'
-        }
-    }
-}
-
 tasks.register('clean', Delete) {
     delete rootProject.layout.buildDirectory
 }
