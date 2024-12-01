@@ -7,14 +7,16 @@ import br.com.frizeiro.admobkit.extensions.add
 import br.com.frizeiro.admobkit.extensions.firstInstallTime
 import br.com.frizeiro.admobkit.extensions.preferencesManager
 import br.com.frizeiro.admobkit.support.PreferencesManager
-import com.facebook.ads.AdSettings
 import com.google.android.gms.ads.AdRequest
 import com.google.android.ump.ConsentDebugSettings
-import com.google.android.ump.ConsentInformation.ConsentStatus.*
+import com.google.android.ump.ConsentInformation.ConsentStatus.NOT_REQUIRED
+import com.google.android.ump.ConsentInformation.ConsentStatus.OBTAINED
+import com.google.android.ump.ConsentInformation.ConsentStatus.REQUIRED
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 /**
  * Created by Felipe Frizeiro on 29/08/20.
@@ -124,10 +126,6 @@ class ConsentManager(activity: Activity) {
 
         config.testDeviceIDs.admob.forEach {
             debugBuilder.addTestDeviceHashedId(it)
-        }
-
-        config.testDeviceIDs.facebook.forEach {
-            AdSettings.addTestDevice(it)
         }
 
         builder.setConsentDebugSettings(debugBuilder.build())

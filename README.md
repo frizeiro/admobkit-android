@@ -63,3 +63,13 @@ You'll need to create accounts for each platform. Please, take a look at Google 
 * [InMobi](https://developers.google.com/admob/android/mediation/inmobi) (coming soon)
 * [AppLovin](https://developers.google.com/admob/android/mediation/applovin) (coming soon)
 * [Liftoff Monetize (Vungle)](https://developers.google.com/admob/android/mediation/vungle) (coming soon)
+
+# TODO: atualizar toda o app de testes, após remoção do Facebook e Pangle.
+
+Manifest merger failed : Attribute property#android.adservices.AD_SERVICES_CONFIG@resource value=(@xml/ga_ad_services_config) from [com.google.android.gms:play-services-measurement-api:22.1.2]
+AndroidManifest.xml:32:13-58
+is also present at [com.google.android.gms:play-services-ads-lite:23.5.0] AndroidManifest.xml:109:13-59 value=(@xml/gma_ad_services_config).
+Suggestion: add 'tools:replace="android:resource"' to <property> element at AndroidManifest.xml to override.
+
+Verificar implementação do consents:
+https://github.com/googleads/googleads-mobile-android-examples/blob/main/kotlin/admob/BannerExample/app/src/main/java/com/google/android/gms/example/bannerexample/MainActivity.kt

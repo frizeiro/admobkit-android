@@ -42,12 +42,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
 
     // AdMob Ads
-    implementation 'com.google.android.gms:play-services-ads:23.5.0'
+    api('com.google.android.gms:play-services-ads:23.5.0') {
+        transitive = true
+    }
 
     // AdMob Mediation
     // implementation 'com.google.ads.mediation:inmobi:10.5.4.0'
-    implementation 'com.google.ads.mediation:facebook:6.18.0.0'
-    implementation 'com.google.ads.mediation:pangle:6.3.0.4.0'
+    // implementation 'com.google.ads.mediation:facebook:6.18.0.0'
+    // implementation 'com.google.ads.mediation:pangle:6.3.0.4.0'
 
     // User Data Consent
     implementation 'com.google.android.ump:user-messaging-platform:3.1.0'

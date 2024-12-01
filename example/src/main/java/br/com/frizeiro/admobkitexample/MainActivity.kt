@@ -79,9 +79,6 @@ class MainActivity : AppCompatActivity() {
             admob = listOf(
                 "0F1B54AE43758E24205DFECFFD517AF5", // Redmi
                 "044386AA23A3AAF7D17383A65C869C67"
-            ),
-            facebook = listOf(
-                "1004585d-8f08-44ed-9fdd-aecbc4c0046d" // Redmi
             )
         )
 
